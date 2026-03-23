@@ -1,0 +1,63 @@
+name: dhh_mace_matpes_r2scan_ft
+model: MACE
+
+train_file: dhh_train.extxyz
+valid_file: dhh_val.extxyz
+test_file: dhh_test.extxyz
+
+# ключи данных
+energy_key: REF_energy
+forces_key: REF_forces
+stress_key: REF_stress
+
+# foundation модель
+foundation_model: /workspaces/wsl_python/fine_tuning_mace/MACE-matpes-r2scan-omat-ft.model
+E0s: foundation
+multiheads_finetuning: false
+
+# finetune только readout (без разрушения backbone)
+foundation_model_readout: true
+
+device: cuda
+default_dtype: float64
+
+# ----- loss -----
+loss: universal
+compute_forces: true
+compute_stress: true
+
+energy_weight: 1.0
+forces_weight: 5.0
+stress_weight: 1.5
+
+# ----- training -----
+batch_size: 8
+valid_batch_size: 8
+max_num_epochs: 80
+patience: 20
+seed: 123
+
+optimizer: adamw
+lr: 1.0e-4
+weight_decay: 1.0e-6
+amsgrad: true
+clip_grad: 5.0
+
+# EMA стабилизирует fine-tune
+swa: false
+ema: true
+ema_decay: 0.999
+
+# dataloader
+num_workers: 4
+pin_memory: true
+
+# чекпойнты
+save_all_checkpoints: true
+eval_interval: 1
+
+# директории
+model_dir: MACE_models_strainmix
+log_dir: MACE_models_strainmix
+checkpoints_dir: MACE_models_strainmix
+results_dir: MACE_models_strainmix
