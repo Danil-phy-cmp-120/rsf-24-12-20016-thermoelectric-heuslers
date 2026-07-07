@@ -4,68 +4,76 @@ This repository contains the datasets, trained models, notebooks, and uncertaint
 
 ---
 
-### Transport and Screening Data
+## 1. Transport and Screening Data
 
-#### `ZT_e_max_by_T_all.csv`
-Electronic figure of merit \(Z_T^{(e)}\) as a function of temperature for all considered double half-Heusler compounds.
+### Electronic Transport Dataset  
+`ZT_e_max_by_T_all.csv`
 
-For each compound and temperature, the file includes electronic transport descriptors such as the Seebeck coefficient, electrical conductivity, power factor, and optimal carrier concentration for both n-type and p-type doping.
+Contains the electronic figure of merit \(Z_T^{(e)}\) as a function of temperature for all considered double half-Heusler compounds. The dataset includes electronic transport descriptors such as Seebeck coefficient, electrical conductivity, power factor, and optimal carrier concentration for both n-type and p-type doping.
 
-#### `elastic_gruneisen_results_final_mace.json`
-Main dataset containing the computed structural, elastic, and thermodynamic properties for the screened compounds.
+### MACE-Derived Elastic and Thermal Descriptor Dataset  
+`elastic_gruneisen_results_final_mace.json`
 
-For each system and phase, it includes total energies, formation energies, energy above hull, MACE-derived elastic tensors, bulk and shear moduli, Poisson ratio, Debye temperature, Grüneisen parameter, and Slack-model lattice thermal conductivity.
-
----
-
-### Uncertainty Analysis
-
-#### `all_errors.csv`
-Numerical uncertainty estimates used in the error-propagation analysis.
-
-The file includes direct and linearized errors, confidence intervals where applicable, and propagated uncertainties for elastic constants, Reuss bulk and shear moduli, sound velocities, Debye temperature, Grüneisen parameter, and Slack lattice thermal conductivity.
-
-#### `dataset_dhh_pareto_elastic.json`
-Additional strain-stress dataset generated for compounds located on or near the Pareto front.
-
-This dataset was used to validate the elastic-property workflow for the most relevant candidate materials and to support the uncertainty analysis of MACE-derived elastic descriptors.
-
-#### `errors_calculations.ipynb`
-Notebook used to calculate and propagate the uncertainty estimates reported in the Supplementary Materials.
-
-It includes processing of elastic-tensor errors, propagation to sound velocities and Debye temperature, EOS-based Grüneisen uncertainty analysis, and final Slack lattice-thermal-conductivity uncertainty estimates.
+Main dataset containing structural, elastic, and thermodynamic properties for the screened compounds. It includes total energies, formation energies, energy above hull, MACE-derived elastic tensors, bulk and shear moduli, Poisson ratio, Debye temperature, Grüneisen parameter, and Slack-model lattice thermal conductivity.
 
 ---
 
-### CHGNet Fine-Tuning Data
+## 2. Elastic Validation and Uncertainty Analysis
 
-#### `chgnet_dataset_dhh_I-42d.json`
-Dataset for CHGNet fine-tuning based on ordered I-42d double half-Heusler structures.
+### Propagated Error and Uncertainty Table  
+`all_errors.csv`
 
-The file contains structures, total energies, atomic forces, and stress tensors where available.
+Contains the numerical uncertainty estimates used in the error-propagation analysis. The file includes direct and linearized errors, confidence intervals where applicable, and propagated uncertainties for elastic constants, Reuss bulk and shear moduli, sound velocities, Debye temperature, Grüneisen parameter, and Slack lattice thermal conductivity.
 
-#### `chgnet_dataset_dhh_Pmn21.json`
-Dataset for CHGNet fine-tuning based on ordered Pmn2₁ double half-Heusler structures.
+### Pareto-Front Elastic Validation Dataset  
+`dataset_dhh_pareto_elastic.json`
 
-It contains the same type of data as the I-42d dataset: structures, energies, forces, and stress tensors where available.
+Additional strain-stress dataset generated for compounds located on or near the Pareto front. This dataset was used to validate the elastic-property workflow for the most relevant candidate materials and to support the uncertainty analysis of MACE-derived elastic descriptors.
 
-#### `chgnet_dataset_dhh_with_stresses.json`
-Extended CHGNet fine-tuning dataset including stress tensors.
+### Error-Propagation Calculation Notebook  
+`errors_calculations.ipynb`
 
-This file was prepared for elasticity-aware training and validation of machine-learning interatomic potentials.
-
-#### `dhh_split_indices.npz`
-Train/validation/test split indices used for model training and evaluation.
+Notebook used to calculate and propagate the uncertainty estimates reported in the Supplementary Materials. It includes processing of elastic-tensor errors, propagation to sound velocities and Debye temperature, EOS-based Grüneisen uncertainty analysis, and final Slack lattice-thermal-conductivity uncertainty estimates.
 
 ---
 
-### Models and Notebooks
+## 3. CHGNet Fine-Tuning Data
 
-#### `epoch49_e140_f26_s290_mNA.pth.tar`
-Fine-tuned CHGNet model checkpoint.
+### CHGNet Training Dataset for I-42d Structures  
+`chgnet_dataset_dhh_I-42d.json`
 
-#### `fine_tuning_dhh.ipynb`
+Dataset for CHGNet fine-tuning based on ordered I-42d double half-Heusler structures. It contains structures, total energies, atomic forces, and stress tensors where available.
+
+### CHGNet Training Dataset for Pmn2₁ Structures  
+`chgnet_dataset_dhh_Pmn21.json`
+
+Dataset for CHGNet fine-tuning based on ordered Pmn2₁ double half-Heusler structures. It contains structures, total energies, atomic forces, and stress tensors where available.
+
+### Stress-Augmented CHGNet Training Dataset  
+`chgnet_dataset_dhh_with_stresses.json`
+
+Extended CHGNet fine-tuning dataset including stress tensors. This file was prepared for elasticity-aware training and validation of machine-learning interatomic potentials.
+
+### Dataset Split Indices  
+`dhh_split_indices.npz`
+
+Train, validation, and test split indices used for model training and evaluation.
+
+---
+
+## 4. Trained Models and Notebooks
+
+### Fine-Tuned CHGNet Model Checkpoint  
+`epoch49_e140_f26_s290_mNA.pth.tar`
+
+Fine-tuned CHGNet model checkpoint used in the validation workflow.
+
+### CHGNet Fine-Tuning Notebook  
+`fine_tuning_dhh.ipynb`
+
 Notebook used for CHGNet fine-tuning on the double half-Heusler dataset.
 
-#### `evaluate_models.ipynb`
+### Model Evaluation Notebook  
+`evaluate_models.ipynb`
+
 Notebook used to evaluate model accuracy and generate comparison plots for energies, forces, stresses, and derived quantities.
