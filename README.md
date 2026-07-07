@@ -18,7 +18,7 @@ For each system and phase, it includes total energies, formation energies, energ
 
 ---
 
-### Elastic and Uncertainty Analysis
+### Uncertainty Analysis
 
 #### `all_errors.csv`
 Numerical uncertainty estimates used in the error-propagation analysis.
